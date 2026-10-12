@@ -1,3 +1,9 @@
 __pycache__/
 *.pyc
 .env
+
+# Benchmark/replay data: real agent prompts and model outputs. Never commit (public repo).
+*-bodies.json
+*-bodies-results.json
+compare.txt
+*.log
