@@ -38,6 +38,18 @@ response = client.chat.completions.create(
 )
 ```
 
+## llama.cpp / GGUF path
+
+[qwen38.py](qwen38.py) is a second serving path: a GGUF model on llama.cpp's official CUDA server image, with the same GPU-snapshot and scale-to-zero pattern. It defaults to `ISTA-DASLab/Qwen3.8-27B-GSQ-RCO-GGUF` (IQ3_S with an MTP head for speculative decoding) and takes overrides from env vars at `modal run`/`modal deploy` time:
+
+```bash
+modal run qwen38.py::download_model                                  # GGUF onto the hf-cache volume
+modal run qwen38.py::smoke                                           # one-shot boot + tool-call check, no deploy
+Q38_GPU=A100-40GB modal run qwen38.py::bench_main --bodies my.json   # one-shot speed run over request bodies
+```
+
+`Q38_REPO` / `Q38_FILE` pick another GGUF, `Q38_MTP=off` for files without an MTP head, `Q38_CTX` and `Q38_KV` set context and KV-cache type. Measurements from the pilot are in [PILOT-RESULTS.md](PILOT-RESULTS.md).
+
 ## Used by
 
 Serves the LLM backend for [sudarshana](https://github.com/rinkesh2010rpp/sudarshana), an autonomous agent, but is otherwise a standalone, reusable serving layer.
