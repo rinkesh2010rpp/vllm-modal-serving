@@ -40,4 +40,4 @@ response = client.chat.completions.create(
 
 ## Used by
 
-Serves the LLM backend for [sudarshana](https://github.com/rinkesh2010rpp/sudarshana), an autonomous agent, but is otherwise a standalone, reusable serving layer.
+The self-hosted model option for [sudarshana](https://github.com/rinkesh2010rpp/sudarshana), an autonomous agent (its default is DeepSeek V4 Flash via OpenRouter), but is otherwise a standalone, reusable serving layer.
